@@ -1,0 +1,172 @@
+set $mod Mod4
+
+font pango:Liberation Mono 8.5
+
+floating_modifier $mod
+
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+
+bindsym $mod+Shift+q kill
+
+bindsym $mod+d exec --no-startup-id dmenu_run
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+h split h
+
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+a focus parent
+
+bindsym $mod+m move workspace to right
+
+set $WS1 1:music
+set $WS2 2:console
+set $WS3 3:web
+set $WS4 4
+set $WS5 5
+set $WS6 R
+set $WS7 7
+set $WS8 8
+set $WS9 9
+
+
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+
+workspace $WS1 output LVDS1
+workspace $WS2 output LVDS1
+#workspace $WS3 output LVDS1
+#workspace $WS4 output LVDS1
+#workspace $WS5 output LVDS1
+
+#assign [class="^Thunderbird$"] $WS3
+#assign [class="^Pidgin$"] $WS4
+#for_window [class="^Pidgin$" title="^Buddy List$"] floating enable
+
+assign [class="^Spotify$"] $WS1
+assign [class="^Pavucontrol$"] $WS1
+
+for_window [class="^Spotify$"] layout tabbed
+for_window [class="^Pavucontrol$"] layout tabbed
+
+#for_window [class="^com-"] floating enable
+
+for_window [class="^Google-"] border none
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#laptop
+bar {
+#  output LVDS1
+  tray_output LVDS1
+  #status_command i3status
+  status_command $HOME/.i3/conky-i3bar
+  position top
+  workspace_buttons yes
+  colors {
+    separator #666666
+    background #222222
+    statusline #dddddd
+    focused_workspace #0088CC #0088CC #ffffff
+    active_workspace #333333 #333333 #ffffff
+    inactive_workspace #333333 #333333 #888888
+    urgent_workspace #2f343a #900000 #ffffff
+  }
+}
+
+client.focused #0088CC #0088CC #ffffff #dddddd
+client.focused_inactive #333333 #333333 #888888 #292d2e
+client.unfocused #333333 #333333 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
+
+# requires: pmount-safe-removal udiskie
+#set $mode_usb_storage (m) mount, (u) unmount
+#mode "$mode_usb_storage" {
+#  bindsym m exec --no-startup-id zsh -i -c 'udiskie &', mode "default"
+#  bindsym u exec --no-startup-id zsh -i -c 'pumount -D /media/*', mode "default"
+#  bindsym Return mode "default"
+#  bindsym Escape mode "default"
+#}
+#bindsym $mod+u mode "$mode_usb_storage"
+
+bindsym $mod+Tab exec --no-startup-id $HOME/.i3/tab_windows.sh
+bindsym Ctrl+Tab exec --no-startup-id $HOME/.i3/dmenu_window_jumper.sh
+
+set $mode_system (l) lock, (r) reboot, (s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id ~/.i3/exit.sh lock, mode "default"
+    bindsym r exec --no-startup-id ~/.i3/exit.sh reboot, mode "default"
+    bindsym s exec --no-startup-id ~/.i3/exit.sh shutdown, mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
+
+exec --no-startup-id setxkbmap de
+exec --no-startup-id pasystray
+exec --no-startup-id nm-applet
+#exec --no-startup-id owncloud
+exec --no-startup-id dropbox
+
+#exec --no-startup-id pidgin
+#exec --no-startup-id thunderbird
+
+# WS1
+exec --no-startup-id i3-msg 'workspace $WS1; exec spotify'
+exec --no-startup-id i3-msg 'workspace $WS1; exec pavucontrol'
+
+#WS2
+exec --no-startup-id i3-msg 'workspace $WS2; exec urxvt'
+exec --no-startup-id i3-msg 'workspace $WS2; exec urxvt'
+
+#WS3
+exec i3-msg --no-startup-id 'workspace $WS3; exec google-chrome-stable'
+
+
+
