@@ -38,12 +38,38 @@ bindsym $mod+a focus parent
 
 bindsym $mod+m move workspace to right
 
+# media keys
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# extra logitech g710 keys
+
+# M1 183
+bindcode 183 -no-startup-idc ~/.i3/spotify-control.sh
+# M2 184
+bindcode 184 --no-startup-idc ~/.i3/spotify-control.sh
+# M3 185
+# MR 186
+# G1 187
+# G2 188
+# G3 189
+# G4 190
+# G5 191
+# G6 192
+
+
 set $WS1 1:music
 set $WS2 2:console
 set $WS3 3:web
 set $WS4 4
 set $WS5 5
-set $WS6 R
+set $WS6 6
 set $WS7 7
 set $WS8 8
 set $WS9 9
@@ -105,8 +131,8 @@ bindsym $mod+r mode "resize"
 bar {
 #  output LVDS1
   tray_output LVDS1
-  #status_command i3status
-  status_command $HOME/.i3/conky-i3bar
+  status_command i3status -c $HOME/.i3/i3status.conf
+  #status_command $HOME/.i3/conky-i3bar
   position top
   workspace_buttons yes
   colors {
@@ -136,7 +162,7 @@ client.urgent #2f343a #900000 #ffffff #900000
 #bindsym $mod+u mode "$mode_usb_storage"
 
 bindsym $mod+Tab exec --no-startup-id $HOME/.i3/tab_windows.sh
-bindsym Ctrl+Tab exec --no-startup-id $HOME/.i3/dmenu_window_jumper.sh
+bindsym Alt_L+Tab exec --no-startup-id $HOME/.i3/dmenu_window_jumper.sh
 
 set $mode_system (l) lock, (r) reboot, (s) shutdown
 mode "$mode_system" {
@@ -153,12 +179,13 @@ mode "$mode_monitor" {
     bindsym l exec --no-startup-id ~/.i3/monitor.sh left, mode "default"
     bindsym r exec --no-startup-id ~/.i3/monitor.sh right, mode "default"
     bindsym s exec --no-startup-id ~/.i3/monitor.sh single, mode "default"
-    bindsym s exec --no-startup-id ~/.i3/monitor.sh auto, mode "default"
+    bindsym a exec --no-startup-id ~/.i3/monitor.sh auto, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+m mode "$mode_monitor"
 
+focus_follows_mouse no
 
 exec --no-startup-id setxkbmap de
 exec --no-startup-id pasystray
@@ -171,7 +198,6 @@ exec --no-startup-id dropbox
 
 # WS1
 exec --no-startup-id i3-msg 'workspace $WS1; exec spotify'
-exec --no-startup-id i3-msg 'workspace $WS1; exec pavucontrol'
 
 #WS2
 exec --no-startup-id i3-msg 'workspace $WS2; exec urxvt'
