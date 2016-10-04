@@ -1,20 +1,20 @@
 #!/bin/sh
 
 # erkennung der Monitore
-xrandr --output LVDS1 --auto --output HDMI1 --auto
+xrandr --output DisplayPort-0 --auto --output HDMI-0 --auto
 
 case "$1" in
     left)
       #laptop steht links vom externen monitor
-      xrandr --output LVDS1 --auto --left-of HDMI1
+      xrandr --output DisplayPort-0 --auto --left-of HDMI-0
       ;;
     right)
       #laptop steht rechts vom externen monitor
-      xrandr --output LVDS1 --auto --right-of HDMI1
+      xrandr --output DisplayPort-0 --auto --right-of HDMI-0
       ;;
     single)
       #laptop einziger bildschrim
-      xrandr --output LVDS1 --auto
+      xrandr --output DisplayPort-0 --auto --output HDMI-0 --off
       ;;
     auto)
       # neu erkennen
