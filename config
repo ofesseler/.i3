@@ -67,7 +67,7 @@ bindcode 184 --no-startup-idc ~/.i3/spotify-control.sh
 set $WS1 1:music
 set $WS2 2:console
 set $WS3 3:web
-set $WS4 4
+set $WS4 4:chat
 set $WS5 5
 set $WS6 6
 set $WS7 7
@@ -102,8 +102,7 @@ workspace $WS2 output LVDS1
 #workspace $WS5 output LVDS1
 
 #assign [class="^Thunderbird$"] $WS3
-#assign [class="^Pidgin$"] $WS4
-#for_window [class="^Pidgin$" title="^Buddy List$"] floating enable
+assign [class="^Pidgin$"] $WS4
 
 assign [class="^Spotify$"] $WS1
 assign [class="^Pavucontrol$"] $WS1
@@ -112,6 +111,8 @@ for_window [class="^Spotify$"] layout tabbed
 for_window [class="^Pavucontrol$"] layout tabbed
 
 #for_window [class="^com-"] floating enable
+#for_window [class="^Pidgin$"] floating enable
+for_window [class="^Pidgin$" title="^Buddy List$"] floating enable
 
 for_window [class="^Google-"] border none
 
@@ -207,4 +208,6 @@ exec --no-startup-id i3-msg 'workspace $WS2; exec urxvt'
 exec i3-msg --no-startup-id 'workspace $WS3; exec google-chrome-stable'
 
 
-
+#WS4
+exec i3-msg --no-startup-id 'workspace $WS4; exec franz-bin'
+exec i3-msg --no-startup-id 'workspace $WS4; exec pidgin'
