@@ -1,23 +1,31 @@
 #!/bin/sh
 
+LAPTOP="LVDS1"
+EXTERNAL="VGA1"
+
 # erkennung der Monitore
-xrandr --output LVDS1 --auto --output HDMI1 --auto
+function detect {
+	xrandr --output $LAPTOP --auto --output $EXTERNAL --auto
+}
+
+detect
 
 case "$1" in
     left)
       #laptop steht links vom externen monitor
-      xrandr --output LVDS1 --auto --left-of HDMI1
+      xrandr --output $LAPTOP --auto --left-of $EXTERNAL
       ;;
     right)
       #laptop steht rechts vom externen monitor
-      xrandr --output LVDS1 --auto --right-of HDMI1
+      xrandr --output $LAPTOP --auto --right-of $EXTERNAL
       ;;
     single)
       #laptop einziger bildschrim
-      xrandr --output LVDS1 --auto
+      xrandr --output $LAPTOP --auto
       ;;
     auto)
       # neu erkennen
+      detect
       ;;
     *)
         echo "Usage: $0 {left|right|single|auto}"
