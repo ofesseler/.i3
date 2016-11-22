@@ -1,7 +1,10 @@
 #!/bin/sh
 
+HDMI="HDMI1"
+VGA="VGA1"
+
 LAPTOP="LVDS1"
-EXTERNAL="VGA1"
+EXTERNAL=$HDMI
 
 # erkennung der Monitore
 function detect {
