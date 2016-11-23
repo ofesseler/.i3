@@ -138,7 +138,7 @@ bindsym $mod+r mode "resize"
 #laptop
 bar {
 #  output LVDS1
-  tray_output LVDS1
+  tray_output primary
   status_command i3status -c $HOME/.i3/i3status.conf
   #status_command $HOME/.i3/conky-i3bar
   position top
@@ -187,6 +187,7 @@ mode "$mode_monitor" {
     bindsym l exec --no-startup-id ~/.i3/monitor.sh left, mode "default"
     bindsym r exec --no-startup-id ~/.i3/monitor.sh right, mode "default"
     bindsym s exec --no-startup-id ~/.i3/monitor.sh single, mode "default"
+    bindsym e exec --no-startup-id ~/.i3/monitor.sh 2*extern, mode "default"
     bindsym a exec --no-startup-id ~/.i3/monitor.sh auto, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"

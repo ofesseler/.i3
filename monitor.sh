@@ -30,6 +30,9 @@ case "$1" in
       # neu erkennen
       detect
       ;;
+    extern)
+      # zwei externe Bildschirme 
+      xrandr --output $EXTERNAL --primary --auto --right-of $VGA
     *)
         echo "Usage: $0 {left|right|single|auto}"
         exit 2
