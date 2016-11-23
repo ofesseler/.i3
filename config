@@ -143,6 +143,8 @@ bar {
   #status_command $HOME/.i3/conky-i3bar
   position top
   workspace_buttons yes
+  font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+  font pango:DejaVu Sans Mono 10
   colors {
     separator #666666
     background #222222
