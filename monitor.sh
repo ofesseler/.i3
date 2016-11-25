@@ -32,9 +32,10 @@ case "$1" in
       ;;
     extern)
       # zwei externe Bildschirme 
-      xrandr --output $EXTERNAL --primary --auto --right-of $VGA
+      xrandr --output $EXTERNAL --auto --right-of $VGA
+      ;;
     *)
-        echo "Usage: $0 {left|right|single|auto}"
+        echo "Usage: $0 {left|right|single|auto|extern}"
         exit 2
 esac
 

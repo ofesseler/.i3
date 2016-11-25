@@ -184,12 +184,12 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+e mode "$mode_system"
 
-set $mode_monitor (l) left, (r) right, (s) single, (a) auto
+set $mode_monitor (l) left, (r) right, (s) single, (a) auto, (e) external
 mode "$mode_monitor" {
     bindsym l exec --no-startup-id ~/.i3/monitor.sh left, mode "default"
     bindsym r exec --no-startup-id ~/.i3/monitor.sh right, mode "default"
     bindsym s exec --no-startup-id ~/.i3/monitor.sh single, mode "default"
-    bindsym e exec --no-startup-id ~/.i3/monitor.sh 2*extern, mode "default"
+    bindsym e exec --no-startup-id ~/.i3/monitor.sh extern, mode "default"
     bindsym a exec --no-startup-id ~/.i3/monitor.sh auto, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
